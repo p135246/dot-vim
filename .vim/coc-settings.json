@@ -1,0 +1,20 @@
+{	
+	//	Run :ConInstall coc-json to use this configuration file.
+	//	It is then accessible under :CocConfig (or :CocLocalConfig)
+	"suggest.noselect": false,
+  	//	Autoselect first item
+	"coc.source.vimtex.enable": true,         
+  	//	Enable vimtex completion
+	//	Run :CocInstall coc-vimtex first
+	"coc.source.vimtex.priority": 90,
+	//	Set priority	
+ 	"coc.source.around.enable": true,
+	//	Enable completion from the around buffer
+	"coc.source.around.priority": 50,
+	"coc.source.buffer.enable": true,
+	"coc.source.buffer.priority": 30,
+	"coc.source.file.enable": true,
+	"coc.source.file.priority": 70,
+	"suggest.snippetIndicator": "►"
+	//	Set symbol to indicate snippets
+}

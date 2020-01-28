@@ -10,9 +10,9 @@
    to clone the repository.
 3. In the directory `temp`, run
 
-   ``cp -r * ~/``
+   ``cp -r .vimrc .vim ~``
    
-   to copy the content to your home directory.
+   to copy the files to your home directory.
 4. Run `gvim` (some errors related to configuration files, autocompletion and plugins might appear --- just ignore them and click through). In the normal mode of `vim` (pressing `ESC`), run
 
     ``:PlugInstall``
