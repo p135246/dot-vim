@@ -30,6 +30,8 @@ call plug#begin('~/.vim/plugged')
 
 	Plug 'reedes/vim-pencil'
 
+	"Plug 'preservim/nerdcommenter'
+
 	"Plug 'ervandew/supertab'
 	
 	Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
@@ -94,6 +96,9 @@ set hlsearch
 set incsearch
 "	Turns on incremental searching.
 
+set keymodel=startsel,stopsel
+"	Select text with shift in insert mode
+
 " ====
 " gvim
 " ====
@@ -141,7 +146,40 @@ let g:vimtex_view_general_options = '--unique file:@pdf\#src:@line@tex'
 let g:vimtex_view_general_options_latexmk = '--unique'
 "	Options required for forward search to work. See `:h vimtex`.
 
+map <c-t> :call Comment()<CR>
+map <c-u> :call Uncomment()<CR>
 
+function! Comment()
+	let ft = &filetype
+	if ft == 'php' || ft == 'ruby' || ft == 'sh' || ft == 'make' || ft == 'python' || ft == 'perl'
+		silent s/^/\#/
+	elseif ft == 'javascript' || ft == 'c' || ft == 'cpp' || ft == 'java' || ft == 'objc' || ft == 'scala' || ft == 'go'
+		silent s:^:\/\/:g
+	elseif ft == 'tex'
+		silent s:^:%:g
+	elseif ft == 'vim'
+		silent s:^:\":g
+	endif
+endfunction
+
+function! Uncomment()
+	let ft = &filetype
+	if ft == 'php' || ft == 'ruby' || ft == 'sh' || ft == 'make' || ft == 'python' || ft == 'perl'
+		silent s/^\#//
+	elseif ft == 'javascript' || ft == 'c' || ft == 'cpp' || ft == 'java' || ft == 'objc' || ft == 'scala' || ft == 'go'
+		silent s:^\/\/::g
+	elseif ft == 'tex'
+		silent s:^%::g
+	elseif ft == 'vim'
+		silent s:^\"::g
+	endif
+endfunction
+
+
+" ==============
+" BLOCK COMMENTS
+" ==============
+" source: https://stackoverflow.com/a/24046914/2571881
 
 " =====================
 " RECOMMENDED COC OPTION
