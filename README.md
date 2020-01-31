@@ -6,7 +6,8 @@
       * <C-XYZTU>
 2. The normal mode should not be altered too much, in particular, the default keybindings should remain.
 3. It should be possible to cancel expansion of a snippet and continue writing.
-4. ...
+4. Math environments should be concealed.
+5. Brackets should be autocompleted cleverly.
 
 # Quick installation guide
 
