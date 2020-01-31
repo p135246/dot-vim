@@ -75,7 +75,7 @@ syntax on
 "	Enables syntax highlighting.
 
 set backspace=indent,eol,start
-"	Modifies backspace behaviour.
+"	Backspace behaviour.
 
 colorscheme nord
 "	Set colorscheme.
@@ -83,7 +83,7 @@ colorscheme nord
 "hi Conceal ctermbg=#2E3440 ctermfg=#D8DEE9
 "	Correct the color of concealed symbols in vim.
 
-imap <C-BS> <C-W>
+inoremap <C-BS> <C-W>
 "	Maps C-BS to C-W in insert mode. Does not work in terminal!
 
 inoremap <C-l> <c-g>u<Esc>[s1z=`]a<c-g>u
@@ -94,10 +94,45 @@ set hlsearch
 "	Highlights search results
 
 set incsearch
-"	Turns on incremental searching.
+"	Turns on incremental searchingi, i.e., searching as typing.
 
+
+set selection=exclusive
 set keymodel=startsel,stopsel
-"	Select text with shift in insert mode
+"	Select text while holding shift, cancel selection by releasing shift
+"	and pressing an other key. 
+
+vnoremap <S-Up>   gk
+vnoremap <S-Down> gj
+imap     <S-Up>   <Esc>gh<S-Up>
+imap     <S-Down> <Esc><Right>gh<S-Down>
+nmap     <S-Up>   gh<S-Up>
+nmap     <S-Down> gh<S-Down>
+"	Corrects the behaviour of shift up, shift down on soft lines.
+"	Depending on the behaviour of k, j (set by vim-pencil), they
+"	move one soft line up and down. 	
+" shift+arrow selection
+"nmap <S-Up> v<Up>
+"nmap <S-Down> v<Down>
+"nmap <S-Left> v<Left>
+"nmap <S-Right> v<Right>
+"vmap <S-Up> <Up>
+"vmap <S-Down> <Down>
+"vmap <S-Left> <Left>
+"vmap <S-Right> <Right>
+"imap <S-Up> <Esc>v<Up>
+"imap <S-Down> <Esc>v<Down>
+"imap <S-Left> <Esc>v<Left>
+"imap <S-Right> <Esc>v<Right>
+vmap <C-c> y<Esc>i
+vmap <C-x> d<Esc>i
+"map <C-v> pi
+imap <C-v> <Esc>gpi
+imap <C-z> <Esc>ui
+imap <C-Y> <Esc><C-R>i
+"	Redo moves the cursor to another position. Correct!
+" <C-O> runs single normal mode command while remaining in insert mode.
+
 
 " ====
 " gvim
@@ -106,13 +141,16 @@ set keymodel=startsel,stopsel
 nnoremap <C-F1> :if &go=~#'m'<Bar>set go-=m<Bar>else<Bar>set go+=m<Bar>endif<CR>
 nnoremap <C-F2> :if &go=~#'T'<Bar>set go-=T<Bar>else<Bar>set go+=T<Bar>endif<CR>
 nnoremap <C-F3> :if &go=~#'r'<Bar>set go-=r<Bar>else<Bar>set go+=r<Bar>endif<CR>
-"	Constrols appearance of the menubar, toolbar and scrollbar
-
+"	Constrols appearance of menubar, toolbar and scrollbar.
+"	C-F1:	Toggle 
 set guifont=DejaVu\ Sans\ Mono\ 13
 "	Sets font in gvim.
 
 hi Conceal guibg=#2E3440  guifg=#D8DEE9
 "	Corrects the color of concealed symbols according to nord-theme
+
+autocmd GUIEnter * set vb t_vb=
+"	Disables the annoying sound in GUI.	
 
 " ==================
 " tex files specific
@@ -171,7 +209,7 @@ function! Uncomment()
 	elseif ft == 'tex'
 		silent s:^%::g
 	elseif ft == 'vim'
-		silent s:^\"::g
+		silent! s:^\"::g
 	endif
 endfunction
 
