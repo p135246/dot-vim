@@ -9,6 +9,8 @@
 4. Math environments should be concealed.
 5. Brackets should be autocompleted cleverly.
 
+Difference: Pressing <C-Right> at the last word skips to the beginning of the first word of the new line. TexMaker skips to the end of the word first. Can be possibly corrected by telling vim to treat he end of line as a word.
+
 # Quick installation guide
 
 1. Make sure that the newest version of `vim` (Vim8) is installed. Install `nodejs` and `yarn` for the autocompletion with `coc` to work (possibly more java related files is needed; not checked!). In order to achieve the best look, make sure that your terminal uses the `nord` theme (go to [nordtheme.com](https://www.nordtheme.com/ports) to configure your applications). Use `gvim` for all the tweeks to work.

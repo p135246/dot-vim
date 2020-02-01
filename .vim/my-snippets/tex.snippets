@@ -3,7 +3,6 @@
 # The following are modified versions of snippets due to Gilles Castel.
 # See https://castel.dev/post/lecture-notes-1/.
 
-# Defines `context "math()"` used to restrict snippets evaluation to math environment.
 global !p
 texMathZones = ['texMathZone'+x for x in ['A', 'AS', 'B', 'BS', 'C',
 'CS', 'D', 'DS', 'E', 'ES', 'F', 'FS', 'G', 'GS', 'H', 'HS', 'I', 'IS',
@@ -26,17 +25,27 @@ def math():
 		return first != ignore
 	except StopIteration:
 		return False
+def test_snippet():
+	vim.command('call input("pause")')
 endglobal
 
-# Begin/end environment
-snippet beg "begin{} / end{}" bA
-\begin{$1}
-	$0
-\end{$1}
+# There is a bug!!!
+snippet beg "\begin{} / \end{}" w
+\begin{$2}
+${1:${VISUAL}}
+\end{$2}
+endsnippet
+
+snippet bd "bold" w
+\textbf{${1:VISUAL}}
+endsnippet
+
+snippet it "italics" w
+\textit{${1:${VISUAL}}}
 endsnippet
 
 # Inline math
-snippet mi "Math" wA
+snippet mk "Math" wA
 $${1}$`!p
 if t[2] and t[2][0] not in [',', '.', '?', '-', ' ']:
     snip.rv = ' '
@@ -52,6 +61,11 @@ $1
 \]
 $0
 endsnippet
+
+snippet ( "Bracket" w
+(${1:${VISUAL}})
+endsnippet
+
 
 # Automatic single subscript
 context "math()"
@@ -94,33 +108,6 @@ context "math()"
 snippet // "Fraction" iA
 \\frac{$1}{$2}$0
 endsnippet
-
-#context "math()"
-#snippet '((\d+)|(\d*)(\\)?([A-Za-z]+)((\^|_)(\{\d+\}|\d))*)/' "Fraction" wrA
-#\\frac{`!p snip.rv = match.group(1)`}{$1}$0
-#endsnippet
-
-#priority 1000
-#context "math()"
-#snippet '^.*\)/' "() Fraction" wrA
-#`!p
-#stripped = match.string[:-1]
-#depth = 0
-#i = len(stripped) - 1
-#while True:
-#	if stripped[i] == ')': depth += 1
-#	if stripped[i] == '(': depth -= 1
-#	if depth == 0: break;
-#	i -= 1
-#snip.rv = stripped[0:i] + "\\frac{" + stripped[i+1:-1] + "}"
-#`{$1}$0
-#endsnippet
-
-# Fraction from selecting denumerator
-#context "math()"
-#snippet / "Fraction" iA
-#\\frac{${VISUAL}}{$1}$0
-#endsnippet
 
 # Overline prefix
 context "math()"

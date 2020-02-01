@@ -64,6 +64,7 @@ call plug#end()
 " vim
 " ===
 
+
 set nocompatible
 " 	Noncompativility mode --- allows Vi iMprovements even when .vimrc is
 " 	present in the project directory.
@@ -96,6 +97,7 @@ set hlsearch
 set incsearch
 "	Turns on incremental searchingi, i.e., searching as typing.
 
+"nnoremap <Esc><Esc> :noh<CR><CR>
 
 set selection=exclusive
 set keymodel=startsel,stopsel
@@ -133,6 +135,12 @@ imap <C-Y> <Esc><C-R>i
 "	Redo moves the cursor to another position. Correct!
 " <C-O> runs single normal mode command while remaining in insert mode.
 
+set clipboard=unnamedplus
+"	Use the system's clipboard for copy-paste.
+
+imap <C-Right> <C-Right>
+
+set number
 
 " ====
 " gvim
