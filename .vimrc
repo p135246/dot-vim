@@ -26,6 +26,8 @@
 " vim-plug --- the plugin manager
 " ===============================
 
+" using coc-snippets! Need to be installed first!
+
 call plug#begin('~/.vim/plugged')
 
 	Plug 'reedes/vim-pencil'
@@ -34,12 +36,12 @@ call plug#begin('~/.vim/plugged')
 
 	"Plug 'ervandew/supertab'
 	
-	Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
-		let g:UltiSnipsExpandTrigger = '<Tab>'
-		let g:UltiSnipsJumpForwardTrigger = '<Tab>'
-		let g:UltiSnipsJumpBackwardTrigger = '<S-Tab>'
+	"Plug 'SirVer/ultisnips', { 'on': []} 
 		"	Control snippets 
-		let g:UltiSnipsSnippetDirectories=["UltiSnips", "my-snippets"]
+	"	let g:UltiSnipsSnippetDirectories=["UltiSnips", "my-snippets"]
+	"	let g:UltiSnipsExpandTrigger = '<Tab>'
+	"	let g:UltiSnipsJumpForwardTrigger = '<Tab>'
+	"	let g:UltiSnipsJumpBackwardTrigger = '<S-Tab>'
 
 	Plug 'lervag/vimtex'
 
@@ -60,10 +62,26 @@ call plug#begin('~/.vim/plugged')
 call plug#end()
 "	Loads all plugins
 
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? coc#_select_confirm() :
+      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+let g:coc_snippet_next = '<tab>'
+
 " ===
 " vim
 " ===
 
+"function! LoadUltiSnips()
+"	call plug#load('ultisnips')
+"endfunction
 
 set nocompatible
 " 	Noncompativility mode --- allows Vi iMprovements even when .vimrc is
@@ -142,6 +160,15 @@ imap <C-Right> <C-Right>
 
 set number
 
+" Commands
+set wildmenu
+set wildmode=longest:full,full
+set completeopt=menuone,noinsert,noselect
+set cmdheight=1
+set noshowmode
+set shortmess+=c
+
+
 " ====
 " gvim
 " ====
@@ -191,6 +218,15 @@ let g:vimtex_view_general_viewer = 'okular'
 let g:vimtex_view_general_options = '--unique file:@pdf\#src:@line@tex'
 let g:vimtex_view_general_options_latexmk = '--unique'
 "	Options required for forward search to work. See `:h vimtex`.
+
+let g:vimtex_quickfix_ignored_warnings = [
+    \ 'Underfull',
+    \ 'Overfull',
+    \ 'specifier changed to',
+    \ ]
+" =======
+" COMMENT
+" =======
 
 map <c-t> :call Comment()<CR>
 map <c-u> :call Uncomment()<CR>
