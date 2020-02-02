@@ -58,18 +58,29 @@ call plug#begin('~/.vim/plugged')
 		" :CocInstall coc-snippets to install the vimtex and snippets
 		" plugins, respectively.
 		"
-		inoremap <silent><expr> <TAB>
-			\ pumvisible() ? coc#_select_confirm() :
-			\ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
-			\ <SID>check_back_space() ? "\<TAB>" :
-			\ coc#refresh()
+"		inoremap <silent><expr> <TAB>
+"			\ pumvisible() ? coc#_select_confirm() :
+"			\ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+"			\ <SID>check_back_space() ? "\<TAB>" :
+"			\ coc#refresh()
 		function! s:check_back_space() abort
   		let col = col('.') - 1
   		return !col || getline('.')[col - 1]  =~# '\s'
 		endfunction
-		let g:coc_snippet_next = '<tab>'
+"		let g:coc_snippet_next = '<tab>'
 		" 	Set tab key to either pick the selected autocompletion or
 		" 	evaluate a snippet. Default setting from coc website.
+		inoremap <silent><expr> <TAB>
+      		\ pumvisible() ? "\<C-n>" :
+      		\ <SID>check_back_space() ? "\<TAB>" :
+      		\ coc#refresh()
+		inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+		" Navigate snippet placeholders using tab
+		let g:coc_snippet_next = '<Tab>'
+		let g:coc_snippet_prev = '<S-Tab>'
+		" Use enter to accept snippet expansion
+		inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<CR>"
+
 call plug#end()
 "	Loads all plugins
 
@@ -93,7 +104,7 @@ set backspace=indent,eol,start
 colorscheme nord
 "	Set colorscheme.
 
-"hi Conceal ctermbg=#2E3440 ctermfg=#D8DEE9
+hi Conceal ctermbg=0 ctermfg=15
 "	Correct the color of concealed symbols in vim. Correc!!
 
 set hlsearch
@@ -116,7 +127,7 @@ set selectmode=key,mouse
 set clipboard=unnamedplus
 "	Use the system's clipboard for copy-paste.
 
-"set number
+set number
 " 	Line numbering.
 
 set wildmenu
@@ -132,8 +143,12 @@ autocmd FileType json syntax match Comment +\/\/.\+$+
 " GVIM
 " ====
 
-set guifont=DejaVu\ Sans\ Mono\ 13
+set guifont=DejaVu\ Sans\ Mono\ 18
 "	Sets font in gvim.
+
+set guioptions-=T
+set guioptions-=m
+" 	Remove menu bar and toolbar
 
 hi Conceal guibg=#2E3440  guifg=#D8DEE9
 "	Corrects the color of concealed symbols in gvim according to nord-theme
