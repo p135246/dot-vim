@@ -1,45 +1,37 @@
 # Goals
 
-1. For tex files, the insert mode should precisely as TexMaker. These commands should end up in the insert mode afer their execution and the cursor position should correspond to the TexMaker's behaviour.
-      * <C-C>: copy
-      * <C-V>: paste
-      * <C-XYZTU>
-2. The normal mode should not be altered too much, in particular, the default keybindings should remain.
-3. It should be possible to cancel expansion of a snippet and continue writing.
-4. Math environments should be concealed.
-5. Brackets should be autocompleted cleverly.
-
-Difference: Pressing <C-Right> at the last word skips to the beginning of the first word of the new line. TexMaker skips to the end of the word first. Can be possibly corrected by telling vim to treat he end of line as a word.
-
-6. In the normal mode, all keybindings should be the default ones. Also, e.g., selection of text!
-7. There should be a mode for *writing* of latex files (concealing, snippets, autocompletion) and for *correcting* of latex files (dictionary, thesaurus, no concealing, no snippets, restricted autocompletion).
+1. The `select` mode of `vim` should resemble the TeXMaker's behaviour as much as possible while the other modes should be kept intact as much as possible. 
+2. There should be a mode for *writing math* in tex (like `:WriteMath`) which sets reasonable soft pencil, concealing, snippets, autocompletion, etc.. There should be a mode for *correcting math* in tex which set which modifies the writing mode.
+3. The settings should be compatible for both `vim` (Vim8) and `nvim`. All features should work in `gvim`.
+4. Snippets and autocompletions should be run by external programs asynchronously so that they do not cause lags while editing.
+5. Forward and reverse search while editing LaTeX documents should work with `Okular`.
 
 # Components
 
-1. `coc` for autocompletion (see [github](https://github.com/neoclide/coc.nvim) and [wiki](https://github.com/neoclide/coc.nvim/wiki)): Written in JavaScript. Runs asynchronously, hence does not slow down the editor. It is possible to add extensions.
-2. `coc-snippets` for snippets: Extension of `coc` which is compatible with lots of UltiSnips snippets.
+1. `vim-plug`for plugin management.
+2. `coc` for autocompletion (see [github](https://github.com/neoclide/coc.nvim) and [wiki](https://github.com/neoclide/coc.nvim/wiki)). It is written in JavaScript, runs asynchronously, and hence does not slow down the editor. Moreover, it has lots of extensions.
+3. `coc-snippets` for snippets. This is an extension of `coc` which is compatible with lots of UltiSnips snippetsi. It is configurable by writing in `$VIMDIR/coc-settings.json`.
+4. `vimtex` for latex features. I use `coc-vimtex` to optimize autocompletion with `vimtex`.
 
 # Quick installation guide
 
-1. Make sure that the newest version of `vim` (Vim8) is installed. Install `nodejs` and `yarn` for the autocompletion with `coc` to work (possibly more java related files is needed; not checked!). In order to achieve the best look, make sure that your terminal uses the `nord` theme (go to [nordtheme.com](https://www.nordtheme.com/ports) to configure your applications). Use `gvim` for all the tweeks to work.
+1. Install `nodejs` (and `yarn` for building from source) for `coc` to work.
 
+2. To achieve the best look, Install `nord-theme` for your terminal (see [nordtheme.com](https://www.nordtheme.com/ports)).
 
-2. In some temporary directory `temp` run
+3. Create a temporary directory `temp`, change into it, and clone the repository:
 
    ``git clone https://github.com/p135246/dot-vim.git .``
    
-   to clone the repository.
-3. In the directory `temp`, run
+3. Overwrite the user's `vim` configuration files:
 
    ``cp -r .vimrc .vim ~``
-   
-   to copy the files to your home directory.
-4. Run `gvim` (some errors related to configuration files, autocompletion and plugins might appear --- just ignore them and click through). In the normal mode of `vim` (pressing `ESC`), run
+  
+4. Run `gvim` and ignore the errors (we have not installed the components yet).
 
-    ``:PlugInstall``
-    
-    to install the plugins. Then quit by running `:q!`.
-5. To make the autocompletion `coc` work, run
+5. Pres `Esc`, type `:PlugInstall` and confirm with `Enter`. This installs the plugins. Quit by typing `:q!`.
+
+6. Start `gvim` again, press `Esc`, run the following commands and then quit:
 
     ``:call coc#util#install()``
     
@@ -47,4 +39,13 @@ Difference: Pressing <C-Right> at the last word skips to the beginning of the fi
     
     ``:CocInstall coc-vimtex``
     
-    Rerun `gvim`, now everything should work.
+    ``:CocInstall coc-snippets``
+
+7. Starting `gvim` again, now everything should work.
+
+
+# Configuration files
+
+1. `~/.vimrc'
+2. `~/.vim/coc-settings.json`
+3. `~/.vim/my-snippets/vim.snippets`
