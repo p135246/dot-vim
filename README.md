@@ -2,7 +2,7 @@
 
 1. Create an all-in-one packet which can be used to set up `vim` quickly for writing math in `LaTeX` even for lame people coming from TeXMaker, TeXStudio, etc. (like me).
 2. The `select` mode of `vim` should resemble TeXMaker's behaviour as much as possible (e.g., ctrl-c, ctrl-x, ctrl-w, ctrl-z, ctrl-z, ctrl-t, ctrl-u, backspace, shift select, system buffer, ...) while the other modes should be kept intact as much as possible so that all "`vim` tricks" can be used in their standard form. (SOLVED PARTIALLY BY REMAPING VIM's KEYBINDINGS)
-3. There should be a mode for *writing math* (like `:WriteMath`) which sets soft wrapping, soft pencil (I use `:SoftPencil` from `vim-pencil` plugin), concealing, snippets (`coc-snippets`), autocompletion (`coc`), etc.. for writing. There should be also a mode for *correcting math* (like `:CorrectMath`) which modifies the writing mode so that it is lighter, uses line numbering, shows commentaries, no concealing, limited autocompletion, spell checking, thesaurus, etc.. (PARTIALLY IMPLEMENTED, BUT NO SUCH COMMANDS EXIST YET)
+3. There should be a mode for *writing math* (like `:WriteMath`) which sets up soft wrapping, soft pencil (I use `:SoftPencil` from `vim-pencil` plugin), concealing, snippets (`coc-snippets`), autocompletion (`coc`), etc.. for writing. There should be also a mode for *correcting math* (like `:CorrectMath`) which modifies the writing mode so that it is lighter, uses line numbering, shows commentaries, no concealing, limited autocompletion, spell checking, thesaurus, etc.. (PARTIALLY IMPLEMENTED, BUT NO SUCH COMMANDS EXIST YET)
 4. All LaTeX writing features should work primarily in `gvim`, i.e., not necessary in terminal. The settings should be compatible with both `vim` (Vim8) and `nvim`, if one wishes to switch to the latter when a suitable GUI is available. 
 5. Snippets and autocompletions should be run by external programs asynchronously so that they do not cause lags while editing. (SOLVED BY USING `coc`)
 6. Forward and reverse search while compiling LaTeX documents with `latexmk` should work with `Okular`. (SOLVED)
@@ -61,4 +61,4 @@
 1. `~/.vimrc`
 2. `~/.vim/coc-settings.json`
 3. `~/.vim/my-snippets/vim.snippets`
-4. `.config/gtk-3.0/gtk.css`
+4. `~/.config/gtk-3.0/gtk.css`
