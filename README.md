@@ -1,10 +1,13 @@
 # Goals
 
-1. The `select` mode of `vim` should resemble the TeXMaker's behaviour as much as possible while the other modes should be kept intact as much as possible. 
-2. There should be a mode for *writing math* in tex (like `:WriteMath`) which sets reasonable soft pencil, concealing, snippets, autocompletion, etc.. There should be a mode for *correcting math* in tex which set which modifies the writing mode.
-3. The settings should be compatible for both `vim` (Vim8) and `nvim`. All features should work in `gvim`.
-4. Snippets and autocompletions should be run by external programs asynchronously so that they do not cause lags while editing.
-5. Forward and reverse search while editing LaTeX documents should work with `Okular`.
+1. Create an all-in-one packet which can be used to set up `vim` quickly for writing math in `LaTeX` even for lame people coming from TeXMaker, TeXStudio, etc. (like me).
+2. The `select` mode of `vim` should resemble TeXMaker's behaviour as much as possible (e.g., ctrl-c, ctrl-x, ctrl-w, ctrl-z, ctrl-z, ctrl-t, ctrl-u, backspace, shift select, system buffer, ...) while the other modes should be kept intact as much as possible so that all "`vim` tricks" can be used in their standard form. (SOLVED PARTIALLY BY REMAPING VIM's KEYBINDINGS)
+3. There should be a mode for *writing math* (like `:WriteMath`) which sets soft wrapping, soft pencil (I use `:SoftPencil` from `vim-pencil` plugin), concealing, snippets (`coc-snippets`), autocompletion (`coc`), etc.. for writing. There should be also a mode for *correcting math* (like `:CorrectMath`) which modifies the writing mode so that it is lighter, uses line numbering, shows commentaries, no concealing, limited autocompletion, spell checking, thesaurus, etc.. (PARTIALLY IMPLEMENTED, BUT NO SUCH COMMANDS EXIST YET)
+4. All LaTeX writing features should work primarily in `gvim`, i.e., not necessary in terminal. The settings should be compatible with both `vim` (Vim8) and `nvim`, if one wishes to switch to the latter when a suitable GUI is available. 
+5. Snippets and autocompletions should be run by external programs asynchronously so that they do not cause lags while editing. (SOLVED BY USING `coc`)
+6. Forward and reverse search while compiling LaTeX documents with `latexmk` should work with `Okular`. (SOLVED)
+7. There should be some basic `git` integration. (NOT IMPLEMENTED YET)
+8. There should be a good compatibility with LaTeX's `subfiles` package like loading completions from all files in the project and so on. In particular, my [latex-document](https://github.com/p135246/latex-document) structure should work nicely. (SOLVED BY SPECIFYING THE `%! TEX root = ../main.tex` DIRECTIVE IN SUBFILES AND RUNNING `:VimtexToggleMain`)
 
 # Components
 
@@ -49,11 +52,12 @@
 
    If the list does not contain the plugins above, try to install them again in `vim`. If this does not help, try some standard "dumb troubleshooting" (i.e., doing something without knowing what it does precisely) like running `:CocFix`, `:CocRestart`, cleaning some directories, etc...
 
-7. Starting `gvim` again, now everything should work.
+7. Start `gvim` again; now all plugins and extensions should work.
 
+8. In order to make reverse search work with `Okular`, do the following. Start `Okular`, click into `Settings/Configure Okular/Editor`, change the type of the text field to `Custom text editor` and type `gvim --servername GVIM --remote +%l %f`. Click `Ok` to save the setting. Now reverse search should work by picking the`Browse Tool` and clicking somewhere while pressing shift. 
 
 # Configuration files
 
-1. `~/.vimrc'
+1. `~/.vimrc`
 2. `~/.vim/coc-settings.json`
 3. `~/.vim/my-snippets/vim.snippets`
