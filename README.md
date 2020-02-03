@@ -25,11 +25,13 @@
    
 3. Overwrite the user's `vim` configuration files:
 
-   ``cp -r .vimrc .vim ~``
+   ``cp -r .vimrc .vim .config ~``
+
+   This will also write a file `gtk.css` in `.config/gtk-3.0/` which corrects white borders around the `gvim` window which appear for some combination of fonts and screen size when the `nord-theme` is used. Note that if `gvim` was built for a different version of GTK (find it out in `vim --version`), move the file accordingly.
   
 4. Run `gvim` and ignore the errors (we have not installed the components yet).
 
-5. Pres `Esc`, type `:PlugInstall` and confirm with `Enter`. This installs the plugins. Quit by typing `:q!`.
+5. Pres `Esc`, type `:PlugInstall` and confirm with `Enter`. This installs the plugins. Quit by running `:q!` two times.
 
 6. Start `gvim` again, press `Esc`, run the following commands and then quit:
 
@@ -40,6 +42,12 @@
     ``:CocInstall coc-vimtex``
     
     ``:CocInstall coc-snippets``
+   
+   In order to view the list of installed plugins, run the following:
+
+    ``:CocList extensions``
+
+   If the list does not contain the plugins above, try to install them again in `vim`. If this does not help, try some standard "dumb troubleshooting" (i.e., doing something without knowing what it does precisely) like running `:CocFix`, `:CocRestart`, cleaning some directories, etc...
 
 7. Starting `gvim` again, now everything should work.
 
