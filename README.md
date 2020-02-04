@@ -61,17 +61,22 @@
 1. `~/.vimrc`
 2. `~/.vim/coc-settings.json`
 3. `~/.vim/my-snippets/vim.snippets`
-4. `.config/gtk-3.0/gtk.css`
+4. `~/.config/gtk-3.0/gtk.css`
 
 
 # Tips and observations
 
 ## Colors and highlighting
 * syntax elements, e.g., `texSpecialChar`,  are defined in `.vim/syntax/tex.vim` and relinked to global names, e.g., `SpecialChar` (if the file does not exist, copy it from a default system location). Theme colors are defined in `.vim/plugged/nord-vim/colors/nord.vim`. The pallete can be found [here.](https://www.nordtheme.com/docs/colors-and-palettes). The setting might be changed by
-   `` :hi Delimiter ctermbg=... ctermfg=.. ``i
+   
+   `` :hi Delimiter ctermbg=... ctermfg=.. ``
+   
    `` :hi Delimiter guibg=... guifg=... ``
+   
 Run `:so $VIMRUNTIME/syntax/hitest.vim` to see all color associations. Also read `:h ft-tex-syntax` for details. Display the syntax group of the current character by
+   
    `` :let s = synID(line('.'), col('.'), 1) | echo synIDattr(s, 'name') . ' -> ' . synIDattr(synIDtrans(s), 'name') ``
+   
 This was taken from [here](https://stackoverflow.com/questions/36993988/how-can-i-find-out-the-syntax-group-of-the-current-character.)
 ## Snippets
 * Select a text, press `<c-j>`, type the name of the snippet, e.g., `beg` and expand it. Now the `$VISUAL` variable of your snippet contains the selected text.
@@ -81,7 +86,8 @@ This was taken from [here](https://stackoverflow.com/questions/36993988/how-can-
 
 ## Searching
 * The following command changes `$$...$$` to `\[...\]` in the entire file:
+
    ``:%s/\$\$\(\_.{-}\)\$\$/\\\[\1\\\]/g``
+   
   Meaning: `%` from beginning to end, `\_` all characters inclusing the end of the line, `.{-}` any number of the previous character (the smallest until the match of the next symbol), `g` do not apply just to the first occurence in each line (this is indeed the default behaviour) but apply to all occurences. Add `n` for a dry run or `c` to require confirmation for each match. 
-=======
-4. `~/.config/gtk-3.0/gtk.css`
+
