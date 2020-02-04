@@ -60,7 +60,7 @@
 
 1. `~/.vimrc`
 2. `~/.vim/coc-settings.json`
-3. `~/.vim/my-snippets/vim.snippets`
+3. `~/.vim/my-snippets/tex.snippets`
 4. `~/.config/gtk-3.0/gtk.css`
 
 
