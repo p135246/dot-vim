@@ -269,4 +269,22 @@ function! Uncomment()
 	endif
 endfunction
 
+" ========================
+" MATH WRITING AND CORRECT
+" ========================
 
+function! CorrectMath()
+	set conceallevel=0
+	hi Delimiter guifg=#B48EAD
+endfunction
+
+command! CorrectMath call CorrectMath()
+
+
+function! WriteMath()
+	SoftPencil
+	set conceallevel=2
+"	hi Delimiter guifg=#B48EAD
+endfunction
+
+command! WriteMath call WriteMath()
