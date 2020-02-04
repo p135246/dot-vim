@@ -124,7 +124,7 @@ set keymodel=startsel
 set selectmode=key,mouse
 " 	Selection mode is intered after pressing shift or mouse select. 
 
-set clipboard=unnamedplus
+"set clipboard=unnamedplus
 "	Use the system's clipboard for copy-paste.
 
 set number
@@ -228,12 +228,13 @@ vnoremap <S-Up>   gk
 vnoremap <S-Down> gj
 " 	Modifies shift arrows to work on soft lines.
 
-vnoremap <C-c> y<Esc>i
-vnoremap <C-x> d<Esc>i
-" 	Allows C-c and C-x to copy and cut, respectively, in visual and selection mode.
+vnoremap <C-c> "+y
+vnoremap <C-x> "+d
+" 	Allows C-c and C-x to copy and cut to the system clipboard, respectively,
+" 	in visual and selection mode.
 
-inoremap <C-v> <Esc>gpi
-" 	Allows C-v to insert text from buffer in insert mode.
+inoremap <C-v> <Esc>"+pa
+" 	Allows C-v to insert text from system clipboard in insert mode.
 
 inoremap <C-z> <Esc>ui
 inoremap <C-y> <Esc><c-r>i
@@ -275,7 +276,16 @@ endfunction
 
 function! CorrectMath()
 	set conceallevel=0
+" 		Do not hide anything.
+	set cursorlineopt=screenline
+	set cursorline
+" 		Highlight the current line. Improve to highlight just soft
+" 		line!
+" 	hi CursorLine guibg=#005f5f
 	hi Delimiter guifg=#B48EAD
+" 		Colorize the delimiters like $, {, etc.
+ 	VimtexToggleMain
+" 		Toggle main file.
 endfunction
 
 command! CorrectMath call CorrectMath()
@@ -284,7 +294,9 @@ command! CorrectMath call CorrectMath()
 function! WriteMath()
 	SoftPencil
 	set conceallevel=2
+	set nocursorline 
 "	hi Delimiter guifg=#B48EAD
+	VimtexToggleMain
 endfunction
 
 command! WriteMath call WriteMath()
