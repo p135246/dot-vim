@@ -67,7 +67,7 @@
 # Tips and observations
 
 ## Colors and highlighting
-* syntax elements, e.g., `texSpecialChar`,  are defined in `.vim/syntax/tex.vim` and relinked to global names, e.g., `SpecialChar` (if the file does not exist, copy it from a default system location). Theme colors are defined in `.vim/plugged/nord-vim/colors/nord.vim`. The pallete can be found [here.](https://www.nordtheme.com/docs/colors-and-palettes). The setting might be changed by
+Syntax elements, e.g., `texSpecialChar`,  are defined in `.vim/syntax/tex.vim` and relinked to global names, e.g., `SpecialChar` (if the file does not exist, copy it from a default system location). Theme colors are defined in `.vim/plugged/nord-vim/colors/nord.vim`. The pallete can be found [here.](https://www.nordtheme.com/docs/colors-and-palettes). The setting might be changed by
    
    `` :hi Delimiter ctermbg=... ctermfg=.. ``
    
