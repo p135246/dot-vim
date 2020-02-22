@@ -47,7 +47,9 @@ call plug#begin('~/.vim/plugged')
 
 	Plug 'KeitaNakamura/tex-conceal.vim', {'for': 'tex'}
 
-	Plug 'arcticicestudio/nord-vim'
+	"Plug 'arcticicestudio/nord-vim'
+
+	Plug 'lifepillar/vim-gruvbox8'
 
 	Plug 'neoclide/coc.nvim', {'branch': 'release'}
 		" Install NodeJS. Install yarn if you want to build coc from
@@ -101,10 +103,10 @@ syntax on
 set backspace=indent,eol,start
 "	Modify backspace behaviour to skip over eol.
 
-colorscheme nord
+colorscheme gruvbox8 
 "	Set colorscheme.
 
-hi Conceal ctermbg=0 ctermfg=15
+"hi Conceal ctermbg=0 ctermfg=15
 "	Correct the color of concealed symbols in vim. Correc!!
 
 set hlsearch
@@ -139,6 +141,9 @@ set wildmode=longest:full,full
 autocmd FileType json syntax match Comment +\/\/.\+$+
 " 	Corrects syntax highlighting of comments in coc-config.json
 
+set noshowmode
+" 	Do not display the mode in the status line.
+
 " ====
 " GVIM
 " ====
@@ -147,10 +152,15 @@ set guifont=DejaVu\ Sans\ Mono\ 18
 "	Sets font in gvim.
 
 set guioptions-=T
+" 	Remove toolbar
 set guioptions-=m
-" 	Remove menu bar and toolbar
+" 	Remove menu bar
+set guioptions-=r
+" 	Removes right hand scroll bar
+set guioptions-=l
+" 	Removes left hand scroll bar
 
-hi Conceal guibg=#2E3440  guifg=#D8DEE9
+"hi Conceal guibg=#2E3440  guifg=#D8DEE9
 "	Corrects the color of concealed symbols in gvim according to nord-theme
 
 autocmd GUIEnter * set vb t_vb=
@@ -228,17 +238,41 @@ vnoremap <S-Up>   gk
 vnoremap <S-Down> gj
 " 	Modifies shift arrows to work on soft lines.
 
-vnoremap <C-c> "+y
+vnoremap <C-c> "+yi
 vnoremap <C-x> "+d
 " 	Allows C-c and C-x to copy and cut to the system clipboard, respectively,
 " 	in visual and selection mode.
 
-inoremap <C-v> <Esc>"+pa
+inoremap <C-v> <Esc>"+p`]i
 " 	Allows C-v to insert text from system clipboard in insert mode.
 
 inoremap <C-z> <Esc>ui
 inoremap <C-y> <Esc><c-r>i
 " 	Allows C-z and C-y to undo and redo the last change in insert mode.
+
+nnoremap <S-h> :call ToggleHiddenAll()<CR>
+" 	Hide status line (because it flickers while using with coc).
+
+" =========
+" HIDE LINE
+" =========
+
+let s:hidden_all = 0
+function! ToggleHiddenAll()
+    if s:hidden_all  == 0
+        let s:hidden_all = 1
+        set noshowmode
+        set noruler
+        set laststatus=0
+        set noshowcmd
+    else
+        let s:hidden_all = 0
+        set showmode
+        set ruler
+        set laststatus=2
+        set showcmd
+    endif
+endfunction
 
 " ==============
 " BLOCK COMMENTS

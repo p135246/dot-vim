@@ -61,7 +61,7 @@ snippet bd "bold" wA
 \textbf{${1:VISUAL}}
 endsnippet
 
-snippet it "italics" w
+snippet tl "italics" wA
 \textit{${1:${VISUAL}}}
 endsnippet
 
@@ -72,7 +72,6 @@ if t[2] and t[2][0] not in [',', '.', '?', '-', ' ']:
 else:
     snip.rv = ''
 `$2
-# The Python Script automatically adds space after $..$ if the user immediately continues typing characters which are not in the list above. This was taken from Gilles Castel's article https://castel.dev/post/lecture-notes-1/
 endsnippet
 
 snippet md "displayed math" wA
@@ -80,15 +79,30 @@ snippet md "displayed math" wA
 $1
 \]
 $0
-# It is advised not to use $$...$$!
 endsnippet
 
-context "math()"
-snippet fr "frac" iA
+#context "math()"
+snippet fc "frac" i
 \\frac{$1}{$2}$0
 endsnippet
 
 context "math()"
 snippet tp "superscript" iA
 ^{$1}$0
+endsnippet
+
+snippet mp "emphasize" wA
+\emph{#1}#0
+endsnippet
+
+snippet nmrt "enumerate" wA
+\begin{enumerate}[#1]
+	\item #2
+\end{enumerate}
+endsnippet
+
+snippet itmz "itemize" wA
+\begin{itemize}[#1]
+	\item #1
+\end{itemize}
 endsnippet
