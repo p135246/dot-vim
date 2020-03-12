@@ -87,10 +87,11 @@ This was taken from [here](https://stackoverflow.com/questions/36993988/how-can-
 ## Searching
 * The following command changes `$$...$$` to `\[...\]` in the entire file:
 
-   ``:%s/\$\$\(\_.{-}\)\$\$/\\\[\1\\\]/g``
+   ``:%s/\$\$\(\_.\{-\}\)\$\$/\\\[\1\\\]/g``
    
   Meaning: `%` from beginning to end, `\_` all characters inclusing the end of the line, `.{-}` any number of the previous character (the smallest until the match of the next symbol), `g` do not apply just to the first occurence in each line (this is indeed the default behaviour) but apply to all occurences. Add `n` for a dry run or `c` to require confirmation for each match.
 * newline `\r`, space `\s`
+* In order to paste into the command line in normal mode, press `<c-f>'.
 
 ## My writing culture
 
