@@ -89,5 +89,11 @@ This was taken from [here](https://stackoverflow.com/questions/36993988/how-can-
 
    ``:%s/\$\$\(\_.{-}\)\$\$/\\\[\1\\\]/g``
    
-  Meaning: `%` from beginning to end, `\_` all characters inclusing the end of the line, `.{-}` any number of the previous character (the smallest until the match of the next symbol), `g` do not apply just to the first occurence in each line (this is indeed the default behaviour) but apply to all occurences. Add `n` for a dry run or `c` to require confirmation for each match. 
+  Meaning: `%` from beginning to end, `\_` all characters inclusing the end of the line, `.{-}` any number of the previous character (the smallest until the match of the next symbol), `g` do not apply just to the first occurence in each line (this is indeed the default behaviour) but apply to all occurences. Add `n` for a dry run or `c` to require confirmation for each match.
+* newline `\r`, space `\s`
+
+## My writing culture
+
+* Each sentence on new line.
+* Use `\[ \]` and not `$$ $$`.
 
