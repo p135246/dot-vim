@@ -50,19 +50,15 @@ def test_snippet():
 	vim.command('call input("pause")')
 endglobal
 
-snippet beg "begin-end" w
-\begin{$1}
-	${2:${VISUAL}}
-\end{$1}
-$0
-endsnippet
 
+
+# \textbf{}
 snippet bd "bold" wA
-\textbf{${1:VISUAL}}
+\textbf{${1:${VISUAL}}}$0
 endsnippet
 
 snippet tl "italics" wA
-\textit{${1:${VISUAL}}}
+\textit{${1:${VISUAL}}}$0
 endsnippet
 
 snippet mk "inline math" wA
@@ -74,12 +70,7 @@ else:
 `$2
 endsnippet
 
-snippet md "displayed math" wA
-\[
-$1
-\]
-$0
-endsnippet
+
 
 #context "math()"
 snippet fc "frac" i
@@ -95,14 +86,90 @@ snippet mp "emphasize" wA
 \emph{#1}#0
 endsnippet
 
-snippet nmrt "enumerate" wA
-\begin{enumerate}[#1]
-	\item #2
-\end{enumerate}
+# ==============
+#  ENVIRONMENTS
+# ==============
+
+snippet bgn "begin-end" bA
+\begin{$1}
+	${2:${VISUAL}}
+\end{$1}
+$0
 endsnippet
 
-snippet itmz "itemize" wA
-\begin{itemize}[#1]
-	\item #1
+snippet eqn "equation*" bA
+\begin{equation*}
+${1:${VISUAL}}
+\end{equation*}
+$0
+endsnippet
+
+snippet algn "align*" bA
+\begin{align*}
+${1:${VISUAL}}
+\end{align*}
+$0
+endsnippet
+
+snippet enmrt "enumerate" bA
+\begin{enumerate}
+	\item ${1:${VISUAL}}
+\end{enumerate}
+$0
+endsnippet
+
+snippet itmz "itemize" bA
+\begin{itemize}
+	\item ${1:${VISUAL}}
 \end{itemize}
+$0
+endsnippet
+
+snippet prp "proposition" bA
+\begin{Proposition}
+	${1:${VISUAL}}
+\end{Proposition}
+$0
+endsnippet
+
+snippet prf "proof" bA
+\begin{proof}
+	${1:${VISUAL}}
+\end{proof}
+$0
+endsnippet
+
+snippet lma "lemma" bA
+\begin{Lemma}
+	${1:${VISUAL}}
+\end{Lemma}
+$0
+endsnippet
+
+snippet dfn "definition" bA
+\begin{Definition}
+	${1:${VISUAL}}
+\end{Definition}
+$0
+endsnippet
+
+snippet rmk "remark" bA
+\begin{Remark}
+	${1:${VISUAL}}
+\end{Remark}
+$0
+endsnippet
+
+snippet exmp "example" bA
+\begin{Example}
+	${1:${VISUAL}}
+\end{Example}
+$0
+endsnippet
+snippet ct "cite" wA
+\cite{$1}$0
+endsnippet
+
+snippet ctp "cite" wA
+\cite[$2]{$1}$0
 endsnippet
