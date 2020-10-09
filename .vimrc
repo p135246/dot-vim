@@ -179,11 +179,24 @@ inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 "	Use Tab and S-Tab to cycle throught completion	
 
+imap <C-l> <Plug>(coc-snippets-expand)
+"	Use <C-l> for trigger snippet expand.
+
+vmap <C-j> <Plug>(coc-snippets-select)
+"	Use <C-j> for select text for visual placeholder of snippet.
+
 let g:coc_snippet_next = '<c-j>'
-" 	Use <C-j> for jump to next placeholder, it's default of coc.nvim
+"	Use <C-j> for jump to next placeholder, it's default of coc.nvim
 
 let g:coc_snippet_prev = '<c-k>'
 "	Use <C-k> for jump to previous placeholder, it's default of coc.nvim
+
+imap <C-j> <Plug>(coc-snippets-expand-jump)
+"	Use <C-j> for both expand and jump (make expand higher priority.)
+
+xmap <leader>x  <Plug>(coc-convert-snippet)
+"	Use <leader>x for convert visual selected code to snippet
+
 
 " ==============
 " VIMTEX OPTIONS 
@@ -197,6 +210,14 @@ let g:tex_flavor = 'latex'
 
 "let g:vimtex_indent_enabled = 0
 " 	Disable automatic indentation
+
+let g:vimtex_delim_toggle_mod_list = [
+      \ ['\bigl', '\bigr'],
+      \ ['\Bigl', '\Bigr'],
+      \ ['\biggl', '\biggr'],
+      \ ['\Biggl', '\Biggr'],
+      \]
+"	Toggle parenthesis
 "
 " =================
 " VIMTEX - QUICKFIX 
@@ -230,14 +251,15 @@ let g:vimtex_view_general_options = '--unique file:@pdf\#src:@line@tex'
 let g:vimtex_view_general_options_latexmk = '--unique'
 "	Options required for forward search to work.
 
-let g:vimtex_view_automatic = 0 
-"	Do not open the preview automatically after compilation.
+let g:vimtex_view_automatic = 1 
+"	Open the preview automatically after compilation.
 "
 " ========================
 " VIMTEX - PDF COMPILATION
 " ========================
 
 let g:vimtex_compiler_latexmk = {
+	\ 'background' : 1,
         \ 'build_dir' : '',
         \ 'callback' : 1,
         \ 'continuous' : 1,
@@ -251,9 +273,14 @@ let g:vimtex_compiler_latexmk = {
         \ ],
         \}
 
-" =================
-" FILETYPE SPECIFIC 
-" =================
+autocmd FileType tex nnoremap <buffer> <LocalLeader>ll :update<cr>:VimtexCompileSS<cr>
+"	Remap \ll to save and compile in a single shot compilation. The
+"	continuous compilation can be now started via :VimtexCompile and
+"	stopped with \lk. To view the status of the compiler type \lg. 
+
+" ===========================
+" OTHER TEX SPECIFIC  OPTIONS
+" ===========================
 
 "autocmd FileType tex call pencil#init({'wrap': 'soft'})
 "	Initializes SoftPencil.	
@@ -333,6 +360,11 @@ inoremap <C-l> <c-g>u<Esc>[s1z=`]a<c-g>u
 
 "nnoremap <S-h> :call ToggleHiddenAll()<CR>
 " 	Hide status line (because it flickers while using with coc).
+
+" ===============
+" CUSTOM COMMANDS
+" ===============
+
 
 " ===================
 " FUNCTION - HIDE LINE

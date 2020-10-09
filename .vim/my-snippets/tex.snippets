@@ -90,81 +90,84 @@ endsnippet
 #  ENVIRONMENTS
 # ==============
 
-snippet bgn "begin-end" bA
+snippet bgn "begin-end" wA
 \begin{$1}
 	${2:${VISUAL}}
-\end{$1}
-$0
+\end{$1}$0
 endsnippet
 
 snippet eqn "equation*" bA
 \begin{equation*}
-${1:${VISUAL}}
-\end{equation*}
-$0
+	${1:${VISUAL}}
+\end{equation*}$0
 endsnippet
 
 snippet algn "align*" bA
 \begin{align*}
-${1:${VISUAL}}
-\end{align*}
-$0
+	${1:${VISUAL}}
+\end{align*}$0
 endsnippet
 
-snippet enmrt "enumerate" bA
+snippet algnd "aligned" wA
+\begin{aligned}
+	${1:${VISUAL}}
+\end{aligned}$0
+endsnippet
+
+
+snippet multlnd "multlined" wA
+\begin{multlined}
+	${1:${VISUAL}}
+\end{multlined}$0
+endsnippet
+
+
+snippet enmrt "enumerate" qA
 \begin{enumerate}
 	\item ${1:${VISUAL}}
-\end{enumerate}
-$0
+\end{enumerate}$0
 endsnippet
 
-snippet itmz "itemize" bA
+snippet itmz "itemize" wA
 \begin{itemize}
 	\item ${1:${VISUAL}}
-\end{itemize}
-$0
+\end{itemize}$0
 endsnippet
 
 snippet prp "proposition" bA
 \begin{Proposition}
 	${1:${VISUAL}}
-\end{Proposition}
-$0
+\end{Proposition}$0
 endsnippet
 
 snippet prf "proof" bA
 \begin{proof}
 	${1:${VISUAL}}
-\end{proof}
-$0
+\end{proof}$0
 endsnippet
 
 snippet lma "lemma" bA
 \begin{Lemma}
 	${1:${VISUAL}}
-\end{Lemma}
-$0
+\end{Lemma}$0
 endsnippet
 
 snippet dfn "definition" bA
 \begin{Definition}
 	${1:${VISUAL}}
-\end{Definition}
-$0
+\end{Definition}$0
 endsnippet
 
 snippet rmk "remark" bA
 \begin{Remark}
 	${1:${VISUAL}}
-\end{Remark}
-$0
+\end{Remark}$0
 endsnippet
 
 snippet exmp "example" bA
 \begin{Example}
 	${1:${VISUAL}}
-\end{Example}
-$0
+\end{Example}$0
 endsnippet
 snippet ct "cite" wA
 \cite{$1}$0
