@@ -85,6 +85,10 @@ This was taken from [here](https://stackoverflow.com/questions/36993988/how-can-
 * `zo`/`zc` (un)folds a group.
 
 ## Searching
+* (IMPROVE!) The following command adds a hard line break after every `.`:
+   `` ``
+* (IMPROVE!) The following command removes unnecessary hard lines starting from the position of the cursor and ending at the end of the file:
+   ``:.,$g/[^.]\n\s*/s/\n\s*/ /g``
 * The following command changes `$$...$$` to `\[...\]` in the entire file:
 
    ``:%s/\$\$\(\_.\{-\}\)\$\$/\\\[\1\\\]/g``
